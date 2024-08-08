@@ -1,0 +1,30 @@
+class Solution {
+public: 
+    vector<vector<int>>ans;
+    void solve(vector<int>& candidates, int target,int i,int currSum,vector<int>output)
+    {
+        if(currSum>target){
+            return;
+        }
+        if(i==candidates.size()){
+            if(currSum==target){
+                ans.push_back(output);
+            }
+            return;
+        }
+
+        currSum+=candidates[i];
+        output.push_back(candidates[i]);
+        solve(candidates,target,i,currSum,output);
+        output.pop_back();
+        currSum-=candidates[i];
+
+        solve(candidates,target,i+1,currSum,output);
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int>output;
+        solve(candidates,target,0,0,output);
+        return ans;
+    }
+};
