@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string mapping[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    void solve(string digits,int ind,string res,vector<string>& ans)
+    {
+        if(ind==digits.size()){
+            ans.push_back(res);
+            return;
+        }
+        int i=digits[ind]-'0';
+        string val=mapping[i];
+        for(int j=0;j<val.length();j++)
+        {
+            res.push_back(val[j]);
+            solve(digits,ind+1,res,ans);
+            res.pop_back();
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string>ans;
+        string res;
+        solve(digits,0,res,ans);
+        return ans;
+    }
+};
