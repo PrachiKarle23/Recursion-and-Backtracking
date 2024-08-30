@@ -1,0 +1,36 @@
+//Recursion
+class Solution {
+public:
+    void solve(string s, string t,int &i,int &j)
+    {
+        if(j>=s.length() || i>=t.length()){
+            return;
+        }
+        if(s[j]==t[i]){
+            j++;
+        }
+        i++;
+        solve(s,t,i,j);
+    }
+    bool isSubsequence(string s, string t) {
+        int i=0,j=0;
+        solve(s,t,i,j);
+        cout<<j;
+        return j==s.length();
+    }
+};
+
+//normal
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        int j=0;
+        for(int i=0;i<t.length()&& j<s.length();i++)
+        {
+            if(s[j]==t[i]){
+              j++;
+            }
+        }
+        return j==s.length();
+    }
+};
