@@ -1,0 +1,36 @@
+class Solution {
+public:
+    void solve(vector<int> a,int k,int target,vector<vector<int>>& ans,int i,int sum,vector<int>b)
+    {
+        if(i>=a.size())
+        {
+            if(sum==target)
+            {
+                if(b.size()==k){
+                    ans.push_back(b);
+                }
+            }
+            return;
+        }
+        
+        sum+=a[i];
+        b.push_back(a[i]);
+        solve(a,k,target,ans,i+1,sum,b);
+        b.pop_back();
+        sum-=a[i];
+
+        solve(a,k,target,ans,i+1,sum,b);
+    }
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>>ans;
+        vector<int>a(9);
+        vector<int>b;
+        for(int i=0;i<9;i++)
+        {
+            a[i]=i+1;
+        }
+
+        solve(a,k,n,ans,0,0,b);
+        return ans;
+    }
+};
